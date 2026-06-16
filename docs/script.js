@@ -1,154 +1,84 @@
-// ═════════ Smooth scroll with Lenis ═════════
-const lenis = new Lenis({
-  duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  smoothWheel: true,
-});
+// ═════════ Reveal animations using IntersectionObserver ═════════
+// Much lighter than GSAP — no scroll lag
 
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
-
-// ═════════ GSAP ScrollTrigger setup ═════════
-gsap.registerPlugin(ScrollTrigger);
-
-// Connect Lenis to ScrollTrigger
-lenis.on('scroll', ScrollTrigger.update);
-gsap.ticker.add((time) => lenis.raf(time * 1000));
-gsap.ticker.lagSmoothing(0);
-
-// ═════════ Hero parallax — landscape moves on scroll ═════════
-gsap.to('.sun', {
-  y: 150,
-  scale: 0.8,
-  scrollTrigger: {
-    trigger: '.hero',
-    start: 'top top',
-    end: 'bottom top',
-    scrub: 1,
-  }
-});
-
-gsap.to('.mountain-back', {
-  y: 80,
-  scrollTrigger: {
-    trigger: '.hero',
-    start: 'top top',
-    end: 'bottom top',
-    scrub: 1,
-  }
-});
-
-gsap.to('.mountain-mid', {
-  y: 60,
-  scrollTrigger: {
-    trigger: '.hero',
-    start: 'top top',
-    end: 'bottom top',
-    scrub: 1,
-  }
-});
-
-gsap.to('.mountain-front', {
-  y: 40,
-  scrollTrigger: {
-    trigger: '.hero',
-    start: 'top top',
-    end: 'bottom top',
-    scrub: 1,
-  }
-});
-
-gsap.to('.grass', {
-  y: 20,
-  scrollTrigger: {
-    trigger: '.hero',
-    start: 'top top',
-    end: 'bottom top',
-    scrub: 1,
-  }
-});
-
-// ═════════ App preview 3D rotation on scroll ═════════
-gsap.fromTo('.preview',
-  {
-    rotateX: 25,
-    scale: 0.95,
-  },
-  {
-    rotateX: 0,
-    scale: 1,
-    scrollTrigger: {
-      trigger: '.preview-wrap',
-      start: 'top 80%',
-      end: 'top 30%',
-      scrub: 1,
-    }
-  }
-);
-
-// ═════════ App preview mouse tilt ═════════
-const preview = document.querySelector('.preview');
-const previewWrap = document.querySelector('.preview-wrap');
-
-if (preview && previewWrap) {
-  previewWrap.addEventListener('mousemove', (e) => {
-    const rect = previewWrap.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-    preview.style.transform = `
-      perspective(1800px)
-      rotateY(${x * 8}deg)
-      rotateX(${-y * 8}deg)
-      translateZ(0)
-    `;
-  });
-
-  previewWrap.addEventListener('mouseleave', () => {
-    preview.style.transform = 'perspective(1800px) rotateY(0) rotateX(0)';
-  });
-}
-
-// ═════════ Reveal on scroll ═════════
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      setTimeout(() => {
-        entry.target.classList.add('revealed');
-      }, i * 80);
-      observer.unobserve(entry.target);
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
     }
   });
 }, {
-  threshold: 0.15,
-  rootMargin: '0px 0px -50px 0px'
+  threshold: 0.12,
+  rootMargin: '0px 0px -60px 0px'
 });
 
-document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-// ═════════ Hero title fade on scroll ═════════
-gsap.to('.hero-inner', {
-  opacity: 0,
-  y: -50,
-  scrollTrigger: {
-    trigger: '.hero',
-    start: 'top top',
-    end: '+=400',
-    scrub: 1,
+// ═════════ Mockup mouse tilt — subtle and smooth ═════════
+const mockup = document.querySelector('.mockup');
+const stage = document.querySelector('.mockup-stage');
+
+if (mockup && stage) {
+  let rafId = null;
+  let targetX = 0;
+  let targetY = 0;
+  let currentX = 0;
+  let currentY = 0;
+
+  function tick() {
+    currentX += (targetX - currentX) * 0.08;
+    currentY += (targetY - currentY) * 0.08;
+
+    mockup.style.transform = `
+      rotateX(${8 + currentY}deg)
+      rotateY(${currentX}deg)
+    `;
+
+    if (Math.abs(targetX - currentX) > 0.01 || Math.abs(targetY - currentY) > 0.01) {
+      rafId = requestAnimationFrame(tick);
+    } else {
+      rafId = null;
+    }
   }
-});
 
-// ═════════ Nav blur intensifies on scroll ═════════
+  stage.addEventListener('mousemove', (e) => {
+    const rect = stage.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+    targetX = x * 6;
+    targetY = -y * 4;
+
+    if (!rafId) rafId = requestAnimationFrame(tick);
+  });
+
+  stage.addEventListener('mouseleave', () => {
+    targetX = 0;
+    targetY = 0;
+    if (!rafId) rafId = requestAnimationFrame(tick);
+  });
+}
+
+// ═════════ Nav scale on scroll — very lightweight ═════════
 const nav = document.querySelector('.nav-pill');
+let lastScroll = 0;
+let ticking = false;
+
 window.addEventListener('scroll', () => {
-  const scrolled = window.scrollY;
-  if (scrolled > 50) {
-    nav.style.transform = 'scale(0.96)';
-  } else {
-    nav.style.transform = 'scale(1)';
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      const scrolled = window.scrollY;
+      if (scrolled > 50 && lastScroll <= 50) {
+        nav.style.transform = 'scale(0.96)';
+      } else if (scrolled <= 50 && lastScroll > 50) {
+        nav.style.transform = 'scale(1)';
+      }
+      lastScroll = scrolled;
+      ticking = false;
+    });
+    ticking = true;
   }
-});
+}, { passive: true });
+
 nav.style.transition = 'transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)';
