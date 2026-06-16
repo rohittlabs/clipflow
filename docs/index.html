@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClipFlow — The clipboard, reimagined for Windows</title>
+<meta name="description" content="A beautiful, lightning-fast clipboard manager for Windows. Free, open source, and privacy-first.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Animated background -->
+<div class="bg-wrapper">
+  <div class="sky"></div>
+  <div class="sun"></div>
+  <div class="mountain mountain-back"></div>
+  <div class="mountain mountain-mid"></div>
+  <div class="mountain mountain-front"></div>
+  <div class="grass"></div>
+</div>
+
+<!-- Floating nav -->
+<nav class="nav">
+  <div class="nav-pill">
+    <a href="#" class="nav-brand">
+      <div class="nav-logo">C</div>
+      <span>ClipFlow</span>
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#privacy">Privacy</a>
+      <a href="https://github.com/rohittlabs/clipflow" target="_blank">GitHub</a>
+    </div>
+    <a href="#download" class="nav-cta">
+      <span class="nav-cta-icon">⬇</span>
+      Download
+    </a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Version 1.0 • Free Forever
+    </div>
+    <h1 class="hero-title">
+      The clipboard,<br>
+      <span class="grad">reimagined.</span>
+    </h1>
+    <p class="hero-sub">
+      Beautiful. Lightning fast. Privacy first.<br>
+      ClipFlow remembers everything you copy, so you don't have to.
+    </p>
+    <div class="hero-cta">
+      <a href="#download" class="btn btn-primary">
+        <span>⬇</span> Download for Windows
+      </a>
+      <a href="#how" class="btn btn-ghost">
+        See how it works
+      </a>
+    </div>
+    <div class="hero-meta">
+      Windows 10/11  •  Free  •  Open source
+    </div>
+  </div>
+
+  <!-- App preview that floats over the landscape -->
+  <div class="preview-wrap">
+    <div class="preview">
+      <div class="preview-glow"></div>
+      <img src="screenshot.png" alt="ClipFlow interface" class="preview-img">
+    </div>
+  </div>
+</section>
+
+<!-- Spacer for content after hero -->
+<div class="content-bg">
+
+  <!-- Features -->
+  <section id="features" class="features">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow">FEATURES</div>
+        <h2>Everything you'd want in a<br>clipboard manager.</h2>
+        <p>Built for people who copy a lot. Polished for people who care about details.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feat" data-reveal>
+          <div class="feat-icon">📋</div>
+          <h3>Full history</h3>
+          <p>Every text, link, and image you copy — automatically saved and ready to retrieve.</p>
+        </div>
+        <div class="feat" data-reveal>
+          <div class="feat-icon">⚡</div>
+          <h3>Instant search</h3>
+          <p>Fuzzy search through your entire clipboard in milliseconds. Find anything fast.</p>
+        </div>
+        <div class="feat" data-reveal>
+          <div class="feat-icon">📌</div>
+          <h3>Pin snippets</h3>
+          <p>Keep your most-used templates, signatures, and commands always one click away.</p>
+        </div>
+        <div class="feat" data-reveal>
+          <div class="feat-icon">🎨</div>
+          <h3>Stunning UI</h3>
+          <p>Dark and light themes with glassmorphism, smooth animations, and zero clutter.</p>
+        </div>
+        <div class="feat" data-reveal>
+          <div class="feat-icon">⌨️</div>
+          <h3>Keyboard first</h3>
+          <p>Designed for power users. Press <code>Ctrl+Shift+V</code> and never touch the mouse.</p>
+        </div>
+        <div class="feat" data-reveal>
+          <div class="feat-icon">🛡️</div>
+          <h3>Privacy guard</h3>
+          <p>Auto-blocks passwords, credit cards, API keys, and JWT tokens before they're saved.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" class="how">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow">HOW IT WORKS</div>
+        <h2>Three steps. That's it.</h2>
+      </div>
+
+      <div class="steps">
+        <div class="step" data-reveal>
+          <div class="step-num">01</div>
+          <h3>Copy anything</h3>
+          <p>Use <code>Ctrl + C</code> as you normally do. ClipFlow runs quietly in your tray.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step" data-reveal>
+          <div class="step-num">02</div>
+          <h3>Open ClipFlow</h3>
+          <p>Press <code>Ctrl + Shift + V</code> from anywhere to bring up your clipboard history.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step" data-reveal>
+          <div class="step-num">03</div>
+          <h3>Pick & paste</h3>
+          <p>Search, select, hit <code>Enter</code>. The item is back on your clipboard, ready to paste.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy -->
+  <section id="privacy" class="privacy">
+    <div class="container">
+      <div class="privacy-card" data-reveal>
+        <div class="privacy-icon">🛡️</div>
+        <div class="section-eyebrow">PRIVACY</div>
+        <h2>Your clipboard never<br>leaves your computer.</h2>
+        <p class="privacy-sub">
+          ClipFlow is built privacy-first. No tracking, no telemetry, no cloud.
+        </p>
+
+        <div class="privacy-grid">
+          <div class="privacy-item">
+            <div class="check">✓</div>
+            <div>
+              <strong>Local storage only</strong>
+              <p>Everything stays in <code>%AppData%\ClipFlow</code></p>
+            </div>
+          </div>
+          <div class="privacy-item">
+            <div class="check">✓</div>
+            <div>
+              <strong>Zero telemetry</strong>
+              <p>No analytics, no phone home, no accounts</p>
+            </div>
+          </div>
+          <div class="privacy-item">
+            <div class="check">✓</div>
+            <div>
+              <strong>Smart sensitive detection</strong>
+              <p>Auto-skips passwords, API keys, credit cards</p>
+            </div>
+          </div>
+          <div class="privacy-item">
+            <div class="check">✓</div>
+            <div>
+              <strong>App exclusions</strong>
+              <p>1Password, Bitwarden, KeePass pre-excluded</p>
+            </div>
+          </div>
+          <div class="privacy-item">
+            <div class="check">✓</div>
+            <div>
+              <strong>Open source</strong>
+              <p>Read every line of code on GitHub</p>
+            </div>
+          </div>
+          <div class="privacy-item">
+            <div class="check">✓</div>
+            <div>
+              <strong>Pause anytime</strong>
+              <p>One click in the tray to stop monitoring</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download -->
+  <section id="download" class="download">
+    <div class="container">
+      <div class="download-inner" data-reveal>
+        <div class="section-eyebrow">DOWNLOAD</div>
+        <h2>Get ClipFlow</h2>
+        <p>Free, forever. No account. No catch.</p>
+        <a href="https://github.com/rohittlabs/clipflow/releases/latest" class="btn btn-primary btn-xl" target="_blank">
+          <span>⬇</span> Download for Windows
+        </a>
+        <div class="download-meta">
+          <span>v1.0.0</span>
+          <span class="dot-sep">•</span>
+          <span>Windows 10/11</span>
+          <span class="dot-sep">•</span>
+          <span>52 MB</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="nav-brand">
+            <div class="nav-logo">C</div>
+            <span>ClipFlow</span>
+          </div>
+          <p class="footer-tag">A beautiful clipboard manager for Windows.</p>
+        </div>
+        <div>
+          <h4>Product</h4>
+          <a href="#features">Features</a>
+          <a href="#download">Download</a>
+          <a href="#privacy">Privacy</a>
+        </div>
+        <div>
+          <h4>Project</h4>
+          <a href="https://github.com/rohittlabs/clipflow" target="_blank">GitHub</a>
+          <a href="https://github.com/rohittlabs/clipflow/issues" target="_blank">Report bug</a>
+          <a href="https://github.com/rohittlabs/clipflow/blob/main/LICENSE" target="_blank">License</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Made with ♥ • MIT License • © 2025 ClipFlow</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Smooth scroll + animations -->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
