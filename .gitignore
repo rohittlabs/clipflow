@@ -1,0 +1,35 @@
+## .NET build outputs
+bin/
+obj/
+publish/
+publish-standalone/
+installer-output/
+
+## Visual Studio
+.vs/
+*.user
+*.suo
+*.cache
+
+## VS Code
+.vscode/
+
+## Rider
+.idea/
+
+## NuGet
+*.nupkg
+packages/
+
+## OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+## App-specific
+*.db
+*.db-journal
+settings.json
+
+## Optional — keep your icon
+!appicon.ico
